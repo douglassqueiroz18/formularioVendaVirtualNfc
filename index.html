@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual NFC - Conecte-se com um Toque</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: url("background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: brightness(0.7);
+    }
+
+    header {
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header img {
+      width: 140px; /* ← Reduzi de 200px para 140px */
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .section {
+      width: 90%;
+      max-width: 600px;
+      margin: 2rem 0;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      padding: 2rem;
+      backdrop-filter: blur(4px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #00c6ff;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    select {
+      background: #1c1c1c;
+      color: #fff;
+    }
+
+    button {
+      background: linear-gradient(135deg, #007aff, #00c6ff);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+    }
+
+    .cart {
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0.5rem 0;
+    }
+
+    .cart-item:last-child {
+      border: none;
+    }
+
+    .total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 1rem;
+      color: #00ffae;
+    }
+
+    .whatsapp-btn {
+      margin-top: 1.5rem;
+      background: #25d366;
+    }
+
+    footer {
+      margin: 2rem 0;
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Virtual NFC Logo">
+    <p>Conecte-se com um simples toque. Mostre seu estilo e sua marca.</p>
+  </header>
+
+  <div class="section">
+    <h2>Monte seu pedido</h2>
+
+    <label for="produto">Selecione o produto:</label>
+    <select id="produto">
+      <option value="">-- Escolha um cartão --</option>
+      <option value="100">1️⃣ Cartão com WhatsApp por aproximação — R$ 100,00</option>
+      <option value="110">➡️ Versão personalizada (WhatsApp) — R$ 110,00</option>
+      <option value="100">2️⃣ Cartão com Instagram por aproximação — R$ 100,00</option>
+      <option value="110">➡️ Versão personalizada (Instagram) — R$ 110,00</option>
+      <option value="150">3️⃣ Cartão com página personalizada — R$ 150,00</option>
+      <option value="160">➡️ Versão personalizada (página) — R$ 160,00</option>
+      <option value="120">➡️ Plaquinha de Instagram/Avaliação Google/Wifi/WhatsApp — R$ 120,00</option>
+    </select>
+
+    <button id="add">Adicionar ao carrinho</button>
+
+    <div class="cart" id="cart"></div>
+
+    <div class="total" id="total">Total: R$ 0,00</div>
+
+    <button class="whatsapp-btn" id="sendWhatsApp">Enviar pedido pelo WhatsApp</button>
+  </div>
+
+  <footer>© 2025 - Virtual NFC</footer>
+
+  <script>
+    const select = document.getElementById("produto");
+    const cartDiv = document.getElementById("cart");
+    const totalDiv = document.getElementById("total");
+    const addBtn = document.getElementById("add");
+    const sendBtn = document.getElementById("sendWhatsApp");
+
+    const cart = [];
+    const whatsappNumber = "5567991846759"; // 👉 Coloque aqui seu número com DDI e DDD
+
+    addBtn.addEventListener("click", () => {
+      const option = select.options[select.selectedIndex];
+      const value = Number(option.value);
+      const text = option.text;
+
+      if (!value) return alert("Selecione um produto válido!");
+
+      cart.push({ text, value });
+      renderCart();
+    });
+
+    function renderCart() {
+      cartDiv.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerText = `${item.text}`;
+        cartDiv.appendChild(div);
+        total += item.value;
+      });
+
+      totalDiv.innerText = `Total: R$ ${total.toFixed(2)}`;
+    }
+
+    sendBtn.addEventListener("click", () => {
+      if (cart.length === 0) return alert("Adicione ao menos um item antes de enviar!");
+
+      const message = cart
+        .map((item, i) => `${i + 1}. ${item.text}`)
+        .join("%0A");
+
+      const total = cart.reduce((sum, i) => sum + i.value, 0);
+      const fullMessage = `Olá! Gostaria de fazer um pedido:%0A%0A${message}%0A%0ATotal: R$ ${total.toFixed(2)}`;
+
+      window.open(`https://wa.me/${whatsappNumber}?text=${fullMessage}`, "_blank");
+    });
+  </script>
+</body>
+</html>
