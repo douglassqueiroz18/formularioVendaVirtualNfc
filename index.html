@@ -120,12 +120,63 @@
       background: #25d366;
     }
 
-    footer {
-      margin: 2rem 0;
+    .exemplos {
+      background: linear-gradient(135deg, #f7f7f7, #ffffff);
+      padding: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       text-align: center;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9rem;
+      margin-top: 40px;
     }
+
+    .exemplos h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .lista-exemplos {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      justify-items: center;
+    }
+
+    .lista-exemplos li a {
+      display: block;
+      background-color: #fff;
+      color: #222;
+      text-decoration: none;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .lista-exemplos li a:hover {
+      background-color: #007bff;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,123,255,0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 40px;
+      border-top: 1px solid #eee;
+    }
+
+    footer strong {
+      color: #007bff;
+    }
+
   </style>
 </head>
 <body>
@@ -157,8 +208,20 @@
 
     <button class="whatsapp-btn" id="sendWhatsApp">Enviar pedido pelo WhatsApp</button>
   </div>
+  <div class="section exemplos">
+    <h2>🌐 Clientes Satisfeitos</h2>
 
-  <footer>© 2025 - Virtual NFC</footer>
+    <ul class="lista-exemplos">
+      <li><a href="https://douglassqueiroz18.github.io/espa-oGloriaJustino/" target="_blank"> Espaço Glória Justino</a></li>
+      <li><a href="https://douglassqueiroz18.github.io/silviaPipoqueira/" target="_blank"> Silvia Pipoqueira</a></li>
+      <li><a href="https://douglassqueiroz18.github.io/bigCenter/" target="_blank"> Big Center Imports</a></li>
+      <li><a href="https://douglassqueiroz18.github.io/goldenClinic/" target="_blank"> Golden Clinic</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>© 2025 — <strong>Virtual NFC</strong> | Tecnologia por aproximação</p>
+  </footer>
 
   <script>
     const select = document.getElementById("produto");
