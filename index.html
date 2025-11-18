@@ -1,277 +1,238 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virtual NFC - Conecte-se com um Toque</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      background: url("background.jpg") no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      backdrop-filter: brightness(0.7);
-    }
-
-    header {
-      width: 100%;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    header img {
-      width: 140px; /* ← Reduzi de 200px para 140px */
-      height: auto;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .section {
-      width: 90%;
-      max-width: 600px;
-      margin: 2rem 0;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      padding: 2rem;
-      backdrop-filter: blur(4px);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #00c6ff;
-    }
-
-    label {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    select, button {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
-    }
-
-    select {
-      background: #1c1c1c;
-      color: #fff;
-    }
-
-    button {
-      background: linear-gradient(135deg, #007aff, #00c6ff);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    button:hover {
-      transform: scale(1.03);
-    }
-
-    .cart {
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 1rem;
-    }
-
-    .cart-item {
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 0.5rem 0;
-    }
-
-    .cart-item:last-child {
-      border: none;
-    }
-
-    .total {
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: right;
-      margin-top: 1rem;
-      color: #00ffae;
-    }
-
-    .whatsapp-btn {
-      margin-top: 1.5rem;
-      background: #25d366;
-    }
-
-    .exemplos {
-      background: linear-gradient(135deg, #f7f7f7, #ffffff);
-      padding: 40px 20px;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .exemplos h2 {
-      font-size: 1.8em;
-      color: #333;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .lista-exemplos {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      justify-items: center;
-    }
-
-    .lista-exemplos li a {
-      display: block;
-      background-color: #fff;
-      color: #222;
-      text-decoration: none;
-      padding: 15px 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .lista-exemplos li a:hover {
-      background-color: #007bff;
-      color: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,123,255,0.3);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 40px;
-      border-top: 1px solid #eee;
-    }
-
-    footer strong {
-      color: #007bff;
-    }
-
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="styles.css"> <title>Virtual NFC - Conecte-se com um Toque</title>
 </head>
+
 <body>
-  <header>
-    <img src="logo.jpg" alt="Virtual NFC Logo">
-    <p>Conecte-se com um simples toque. Mostre seu estilo e sua marca.</p>
-  </header>
+<header>
+<img src="logo.jpg" alt="Virtual NFC Logo">
+<p>Conecte-se com um simples toque. Mostre seu estilo e sua marca.</p>
+</header>
 
-  <div class="section">
-    <h2>Monte seu pedido</h2>
+ <div class="section produtos">
+<h2>✨ Nossos Produtos</h2>
+<div class="grid-produtos">
 
-    <label for="produto">Selecione o produto:</label>
-    <select id="produto">
-      <option value="">-- Escolha um cartão --</option>
-      <option value="100">1️⃣ Cartão com WhatsApp por aproximação — R$ 100,00</option>
-      <option value="110">➡️ Versão personalizada (WhatsApp) — R$ 110,00</option>
-      <option value="100">2️⃣ Cartão com Instagram por aproximação — R$ 100,00</option>
-      <option value="110">➡️ Versão personalizada (Instagram) — R$ 110,00</option>
-      <option value="180">3️⃣ Cartão com página personalizada — R$ 180,00</option>
-      <option value="190">➡️ Versão personalizada (página) — R$ 190,00</option>
-      <option value="120">➡️ Plaquinha de Instagram/Avaliação Google/Wifi/WhatsApp — R$ 120,00</option>
-    </select>
+<div class="card-produto" id="card-whatsapp">
+ <div class="produto-imagem" id="img-whatsapp" style="background-image: url('cartaoNaoPersonalizado.jpeg');"></div>
+ <h3>Cartão WhatsApp</h3> 
+ <div class="options">
+ <label>
+  <input type="checkbox" name="group-whatsapp" value="100" data-name="1️⃣ Cartão WhatsApp Padrão" data-image="cartaoNaoPersonalizado.jpeg"> Padrão
+  <span class="option-price">(R$ 100,00)</span>
+ </label>
+ <label>
+  <input type="checkbox" name="group-whatsapp" value="110" data-name="➡️ Versão personalizada (WhatsApp)" data-image="cartaoPersonalizado1.png"> Personalizada
+  <span class="option-price">(R$ 110,00)</span>
+ </label>
+ </div>
+</div>
 
-    <button id="add">Adicionar ao carrinho</button>
+<div class="card-produto" id="card-instagram">
+ <div class="produto-imagem" id="img-instagram" style="background-image: url('cartaoNaoPersonalizado.jpeg');"></div>
+ <h3>Cartão Instagram</h3>
+ <div class="options">
+ <label>
+  <input type="checkbox" name="group-instagram" value="100" data-name="2️⃣ Cartão Instagram Padrão" data-image="cartaoNaoPersonalizado.jpeg"> Padrão
+  <span class="option-price">(R$ 100,00)</span>
+ </label>
+ <label>
+  <input type="checkbox" name="group-instagram" value="110" data-name="➡️ Versão personalizada (Instagram)" data-image="cartaoPersonalizado1.png"> Personalizada
+  <span class="option-price">(R$ 110,00)</span>
+ </label>
+ </div>
+</div>
 
-    <div class="cart" id="cart"></div>
+<div class="card-produto" id="card-pagina">
+<div class="produto-imagem" id="img-pagina" style="background-image: url('cartaoNaoPersonalizado.jpeg');"></div>
+<h3>Cartão Página</h3>
+<div class="options">
+<label>
+ <input type="checkbox" name="group-pagina" value="180" data-name="3️⃣ Cartão com página personalizada" data-image="cartaoNaoPersonalizado.jpeg"> Padrão
+ <span class="option-price">(R$ 180,00)</span>
+</label>
+<label>
+ <input type="checkbox" name="group-pagina" value="190" data-name="➡️ Versão personalizada (página)" data-image="cartaoPersonalizado1.png"> Personalizada
+ <span class="option-price">(R$ 190,00)</span>
+</label>
+</div>
+</div>
 
-    <div class="total" id="total">Total: R$ 0,00</div>
+<div class="card-produto" id="card-placa">
+ <div class="produto-imagem" id="img-placa" style="background-image: url('placa_aproximacao.jpg');"></div>
+ <h3>Placa NFC</h3>
+ <div class="options">
+ <label>
+  <input type="checkbox" name="group-placa" value="120" data-name="➡️ Plaquinha de Instagram/Avaliação Google/Wifi/WhatsApp" data-image="placa_aproximacao.jpg"> Selecionar Placa
+  <span class="option-price">(R$ 120,00)</span>
+ </label>
+ </div>
+</div>
+</div>
+</div>
 
-    <button class="whatsapp-btn" id="sendWhatsApp">Enviar pedido pelo WhatsApp</button>
-  </div>
-  <div class="section exemplos">
-    <h2>🌐 Clientes Satisfeitos</h2>
+<div class="section">
+<h2>🛒 Carrinho de Pedidos</h2>
 
-    <ul class="lista-exemplos">
-      <li><a href="https://douglassqueiroz18.github.io/espa-oGloriaJustino/" target="_blank"> Espaço Glória Justino</a></li>
-      <li><a href="https://douglassqueiroz18.github.io/silviaPipoqueira/" target="_blank"> Silvia Pipoqueira</a></li>
-      <li><a href="https://douglassqueiroz18.github.io/bigCenter/" target="_blank"> Big Center Imports</a></li>
-      <li><a href="https://douglassqueiroz18.github.io/goldenClinic/" target="_blank">
-         Golden Clinic</a></li>
-    </ul>
-  </div>
+ <button id="add">Atualizar Carrinho/Total</button>
 
-  <footer>
-    <p>© 2025 — <strong>Virtual NFC</strong> | Tecnologia por aproximação</p>
-  </footer>
+<div class="cart" id="cart">
+ <p>Selecione os produtos acima.</p>
+</div>
 
-  <script>
-    const select = document.getElementById("produto");
-    const cartDiv = document.getElementById("cart");
-    const totalDiv = document.getElementById("total");
-    const addBtn = document.getElementById("add");
-    const sendBtn = document.getElementById("sendWhatsApp");
+<div class="total" id="total">Total: R$ 0,00</div>
 
-    const cart = [];
-    const whatsappNumber = "5567991846759"; // 👉 Coloque aqui seu número com DDI e DDD
+<button class="whatsapp-btn" id="sendWhatsApp">Enviar pedido pelo WhatsApp</button>
+</div>
 
-    addBtn.addEventListener("click", () => {
-      const option = select.options[select.selectedIndex];
-      const value = Number(option.value);
-      const text = option.text;
+<div class="section exemplos">
+<h2>🌐 Clientes Satisfeitos</h2>
+<ul class="lista-exemplos">
+<li><a href="https://douglassqueiroz18.github.io/espa-oGloriaJustino/" target="_blank"> Espaço Glória Justino</a></li>
+<li><a href="https://douglassqueiroz18.github.io/silviaPipoqueira/" target="_blank"> Silvia Pipoqueira</a></li>
+<li><a href="https://douglassqueiroz18.github.io/bigCenter/" target="_blank"> Big Center Imports</a></li>
+<li><a href="https://douglassqueiroz18.github.io/goldenClinic/" target="_blank">Golden Clinic</a></li>
+</ul>
+</div>
 
-      if (!value) return alert("Selecione um produto válido!");
+<footer>
+<p>© 2025 — <strong>Virtual NFC</strong> | Tecnologia por aproximação</p>
+</footer>
 
-      cart.push({ text, value });
-      renderCart();
-    });
+<script>
+const cartDiv = document.getElementById("cart");
+const totalDiv = document.getElementById("total");
+const addBtn = document.getElementById("add");
+const sendBtn = document.getElementById("sendWhatsApp");
+// CORRIGIDO: Seleciona todos os checkboxes com names de grupo
+const productCheckboxes = document.querySelectorAll('.card-produto input[type="checkbox"]');
 
-    function renderCart() {
-      cartDiv.innerHTML = "";
-      let total = 0;
+let cart = [];
+const whatsappNumber = "5567991846759";
 
-      cart.forEach((item) => {
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerText = `${item.text}`;
-        cartDiv.appendChild(div);
-        total += item.value;
-      });
+// ----------------------------------------------------
+// Função para atualizar a imagem do produto
+// ----------------------------------------------------
+function updateCardImage(checkbox) {
+  // Encontra o card pai (o .card-produto)
+  const card = checkbox.closest('.card-produto');
+  if (!card) return;
 
-      totalDiv.innerText = `Total: R$ ${total.toFixed(2)}`;
+  // Encontra a div da imagem dentro do card
+  const imageDiv = card.querySelector('.produto-imagem');
+  const groupName = checkbox.name;
+
+  if (checkbox.checked) {
+   // Se marcado, usa a imagem do atributo data-image
+   const newImage = checkbox.dataset.image;
+   imageDiv.style.backgroundImage = `url('${newImage}')`;
+  } else {
+   // Se desmarcado, reverte para a imagem padrão se não houver outro marcado no grupo
+   const checkedSiblings = card.querySelectorAll(`input[name="${groupName}"]:checked`);
+   
+   if (checkedSiblings.length === 0) {
+    // Reverte para a imagem da primeira opção (que deve ser o padrão)
+    const defaultOption = card.querySelector(`input[name="${groupName}"][data-image]`);
+    if (defaultOption) {
+     imageDiv.style.backgroundImage = `url('${defaultOption.dataset.image}')`;
     }
+   }
+  }
+}
 
-    sendBtn.addEventListener("click", () => {
-      if (cart.length === 0) return alert("Adicione ao menos um item antes de enviar!");
 
-      const message = cart
-        .map((item, i) => `${i + 1}. ${item.text}`)
-        .join("%0A");
+// Função para recalcular e renderizar o carrinho
+function renderCart() {
+ cart = []; // Limpa o carrinho a cada renderização/atualização
 
-      const total = cart.reduce((sum, i) => sum + i.value, 0);
-      const fullMessage = `Olá! Gostaria de fazer um pedido:%0A%0A${message}%0A%0ATotal: R$ ${total.toFixed(2)}`;
+ // Itera sobre todos os checkboxes de produto
+ productCheckboxes.forEach(checkbox => {
+  if (checkbox.checked) {
+   // Adiciona o item ao carrinho se estiver marcado
+   const value = Number(checkbox.value);
+   // Pega o texto formatado do preço ao lado do checkbox
+   const priceText = checkbox.parentNode.querySelector('.option-price').textContent; 
+   const text = checkbox.dataset.name + ` — ${priceText}`;
+   cart.push({ text, value });
+  }
+ });
 
-      window.open(`https://wa.me/${whatsappNumber}?text=${fullMessage}`, "_blank");
-    });
-  </script>
+ cartDiv.innerHTML = "";
+ let total = 0;
+
+ if (cart.length === 0) {
+  cartDiv.innerHTML = "<p>Selecione os produtos acima.</p>";
+ } else {
+  cart.forEach((item) => {
+   const div = document.createElement("div");
+   div.className = "cart-item";
+   // Exibe o nome e o preço do item
+   div.innerText = item.text;
+   cartDiv.appendChild(div);
+   total += item.value;
+  });
+ }
+
+ totalDiv.innerText = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+// Lógica de seleção única por grupo (produto) e ATUALIZAÇÃO DA IMAGEM
+productCheckboxes.forEach(checkbox => {
+ checkbox.addEventListener('change', function() {
+  const groupName = this.name;
+  
+  if (this.checked) {
+   // Desmarca outros checkboxes do mesmo grupo
+   document.querySelectorAll(`input[name="${groupName}"]`).forEach(otherCheckbox => {
+    if (otherCheckbox !== this) {
+     otherCheckbox.checked = false;
+    }
+   });
+  }
+  
+  // ATUALIZAÇÃO CHAVE: Chama a função de troca de imagem e o carrinho
+  updateCardImage(this);
+  renderCart();
+ });
+});
+
+// O botão "Atualizar Carrinho/Total" mantém a função de renderização
+addBtn.addEventListener("click", renderCart);
+
+
+sendBtn.addEventListener("click", () => {
+ // Garantir que o carrinho esteja atualizado antes de enviar
+ renderCart();
+
+ if (cart.length === 0) return alert("Adicione ao menos um item antes de enviar!");
+
+ // Formata a mensagem do pedido
+ const message = cart
+  .map((item, i) => `${i + 1}. ${item.text}`)
+  .join("%0A");
+
+ const total = cart.reduce((sum, i) => sum + i.value, 0);
+ const fullMessage = `Olá! Gostaria de fazer um pedido:%0A%0A${message}%0A%0ATotal: R$ ${total.toFixed(2).replace('.', ',')}`;
+
+ window.open(`https://wa.me/${whatsappNumber}?text=${fullMessage}`, "_blank");
+});
+
+// Renderiza o carrinho inicial ao carregar a página
+document.addEventListener('DOMContentLoaded', renderCart);
+// Também garante que as imagens padrão estejam corretas ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+ productCheckboxes.forEach(checkbox => {
+  // Se um item estiver pre-selecionado (ou seja o único), garante que a imagem correta seja carregada.
+  if (checkbox.checked) {
+   updateCardImage(checkbox);
+  }
+ });
+});
+</script>
 </body>
+
 </html>
